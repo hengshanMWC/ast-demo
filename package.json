@@ -17,6 +17,8 @@
     "recast": "^0.19.1"
   },
   "devDependencies": {
-    "box-cat": "^3.0.6"
+    "box-cat": "^3.0.6",
+    "fly": "^4.1.6",
+    "flyio": "^0.6.14"
   }
 }

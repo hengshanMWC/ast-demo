@@ -1,5 +1,11 @@
-const path = require('path')
-const { getAst } = require('../plugin/tool')
-const BoxCatplugin = require('../plugin/box-cat/index')
-const ast = getAst(path.join(__dirname, "../test/box-cat/index.js"))
-BoxCatplugin(ast, path.join(__dirname, "../test/box-cat"), path.join(__dirname, "../test/box-cat/dist"))
+const { pathJoin } = require('./utils')
+const BoxCatWebpackplugin = require('../plugin/box-cat/index')
+const confing = {
+  entry: pathJoin("../test/box-cat/index.js"),
+  output: pathJoin("../test/box-cat/dist"),
+  identifier: {
+    data: 'data',
+    http: 'http'
+  }
+}
+BoxCatWebpackplugin(confing)
