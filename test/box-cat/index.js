@@ -1,4 +1,4 @@
-export default {
+const data = {
   postCommodity: 'commodity',
   getCommodityList: 'commodity/list',
   getCommodity: 'commodity/:id',

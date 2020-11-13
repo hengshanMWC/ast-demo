@@ -1,0 +1,5 @@
+const path = require('path')
+const { getAst } = require('../plugin/tool')
+const BoxCatplugin = require('../plugin/box-cat/index')
+const ast = getAst(path.join(__dirname, "../test/box-cat/index.js"))
+BoxCatplugin(ast, path.join(__dirname, "../test/box-cat"), path.join(__dirname, "../test/box-cat/dist"))
