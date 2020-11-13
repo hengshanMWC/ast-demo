@@ -5,27 +5,40 @@ const createMkdir = require('../../utils/createMkdir')
 const TNT = recast.types.namedTypes
 module.exports = function varFile (ast, file, dist) {
   const {
-    variableDeclaration,
     objectExpression,
     objectPattern,
-    functionDeclaration,
-    arrayPattern,
+    exportDeclaration,
+    variableDeclaration,
+    variableDeclarator,
+    functionExpression,
     blockStatement,
     returnStatement,
     literal,
+    functionDeclaration,
     identifier,
   } = recast.types.builders
   const body = ast.program.body
   const properties = body[0].declarations[0].init.properties
   const newProperties = properties.map(property => {
-    return functionDeclaration(
-      identifier(property.key.name),
-      [],
-      blockStatement([
-        returnStatement(
-          literal(property.value.value)
-        )
-      ])
+    return exportDeclaration(
+      false,
+      variableDeclaration(
+        'const',
+        [
+          variableDeclarator(
+            identifier(property.key.name),
+            functionExpression(
+              null,
+              [],
+              blockStatement([
+                returnStatement(
+                  literal(property.value.value)
+                )
+              ])
+            )
+          )
+        ]
+      )
     )
   })
   body.push(...newProperties)
