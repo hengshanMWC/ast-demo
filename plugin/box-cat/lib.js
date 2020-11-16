@@ -1,10 +1,8 @@
 const recast = require("recast");
-const path = require('path')
-const fs = require('fs')
-const createMkdir = require('../../utils/createMkdir')
+
 const { getAst } = require('../tool')
-module.exports = function (confing) {
-  const ast = getAst(confing.entry)
+module.exports = function (config) {
+  const ast = getAst(config.entry)
   const {
     exportDeclaration,
     variableDeclaration,
@@ -40,6 +38,5 @@ module.exports = function (confing) {
     )
   })
   body.push(...newDataAst)
-  createMkdir(confing.output)
-  fs.writeFileSync(path.join(confing.output, 'index.js'), recast.print(ast).code)
+  return recast.print(ast).code
 }
