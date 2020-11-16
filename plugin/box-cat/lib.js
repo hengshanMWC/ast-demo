@@ -7,9 +7,7 @@ module.exports = function (config) {
     exportDeclaration,
     variableDeclaration,
     variableDeclarator,
-    functionExpression,
-    blockStatement,
-    returnStatement,
+    memberExpression,
     literal,
     identifier,
   } = recast.types.builders
@@ -23,14 +21,9 @@ module.exports = function (config) {
         [
           variableDeclarator(
             identifier(item.key.name),
-            functionExpression(
-              null,
-              [],
-              blockStatement([
-                returnStatement(
-                  literal(item.value.value)
-                )
-              ])
+            memberExpression(
+              identifier(config.identifier.http),
+              literal(item.key.name),
             )
           )
         ]

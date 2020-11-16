@@ -1,6 +1,6 @@
 const { pathJoin } = require('./utils')
 const BoxCatWebpackplugin = require('../plugin/box-cat/index')
-const confing = {
+const config = {
   entry: pathJoin("../test/box-cat/index.js"),
   output: pathJoin("../test/box-cat/dist"),
   identifier: {
@@ -8,4 +8,4 @@ const confing = {
     http: 'http'
   }
 }
-BoxCatWebpackplugin(confing)
+BoxCatWebpackplugin(config)
